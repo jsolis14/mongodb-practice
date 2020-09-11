@@ -16,16 +16,12 @@ describe('Finding records', () => {
     })
 
     //create tests
-    it('Finds one record from the database', async () => {
+    it('Deletes one record from the database', async () => {
+        await MarioChar.findOneAndRemove({ name: 'Mario' })
 
         const res = await MarioChar.findOne({ name: 'Mario' })
 
-        assert(res.name === 'Mario')
+        assert(!res)
     })
 
-    it('Finds record by id', async () => {
-        const res = await MarioChar.findOne({ _id: char._id })
-
-        assert(res._id.toString() === char._id.toString())
-    })
 })
