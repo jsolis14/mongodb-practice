@@ -2,7 +2,7 @@ const assert = require('assert');
 const MarioChar = require('../models/marioChar');
 const { createHash } = require('crypto');
 
-describe('Deleting records', () => {
+describe('Updating records', () => {
     var char
     beforeEach(async () => {
         //create marChar instance
@@ -16,12 +16,11 @@ describe('Deleting records', () => {
     })
 
     //create tests
-    it('Deletes one record from the database', async () => {
-        await MarioChar.findOneAndRemove({ name: 'Mario' })
+    it('Updates one record from the database', async () => {
+        await MarioChar.findOneAndUpdate({ name: 'Mario' }, { name: 'Luigi' })
+        const res = await MarioChar.findOne({ _id: char._id })
 
-        const res = await MarioChar.findOne({ name: 'Mario' })
-
-        assert(!res)
+        assert(res.name === 'Luigi')
     })
 
 })
