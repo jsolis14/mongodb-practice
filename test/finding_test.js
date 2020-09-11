@@ -1,12 +1,13 @@
 const mocha = require('mocha');
 const assert = require('assert');
 const MarioChar = require('../models/marioChar');
+const { createHash } = require('crypto');
 
 describe('Finding records', () => {
-
+    var char
     beforeEach(async () => {
         //create marChar instance
-        var char = new MarioChar({
+        char = new MarioChar({
             name: 'Mario'
         })
 
@@ -21,5 +22,11 @@ describe('Finding records', () => {
         const res = await MarioChar.findOne({ name: 'Mario' })
 
         assert(res.name === 'Mario')
+    })
+
+    it('Finds record by id', async () => {
+        const res = await MarioChar.findOne({ _id: char._id })
+
+        assert(res._id.toString() === char._id.toString())
     })
 })
