@@ -1,8 +1,13 @@
 const assert = require('assert');
 const MarioChar = require('../models/marioChar');
 const { createHash } = require('crypto');
-
+const mongoose = require('mongoose');
 describe('Finding records', () => {
+    beforeEach(async () => {
+        //drop the collection
+        await mongoose.connection.collections.mariochars.drop()
+    })
+
     var char
     beforeEach(async () => {
         //create marChar instance

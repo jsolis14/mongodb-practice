@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-
+const MarioChar = require('../models/marioChar');
 
 //connect to DB before test runs
 before((done) => {
@@ -16,9 +16,7 @@ before((done) => {
     });
 })
 
-
-//drop the characters collection before each test
-beforeEach(async () => {
-    //drop the collection
-    await mongoose.connection.collections.mariochars.drop()
+before(async () => {
+    const char = new MarioChar({ name: 'Mario' })
+    await char.save()
 })
