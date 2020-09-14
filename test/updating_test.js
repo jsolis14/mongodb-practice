@@ -7,7 +7,8 @@ describe('Updating records', () => {
     beforeEach(async () => {
         //create marChar instance
         char = new MarioChar({
-            name: 'Mario'
+            name: 'Mario',
+            weight: 50
         })
 
         //save instance to database
@@ -21,6 +22,12 @@ describe('Updating records', () => {
         const res = await MarioChar.findOne({ _id: char._id })
 
         assert(res.name === 'Luigi')
+    })
+
+    it('Increments the weight by one', async () => {
+        await MarioChar.updateMany({}, { $inc: { weight: 1 } })
+        const res = await MarioChar.findOne({ name: 'Mario' })
+        assert(res.weight === 51)
     })
 
 })
